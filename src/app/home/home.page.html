@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Translation Documents </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Translation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <strong>Ready to create an app?</strong>
+    <p>
+      Start with Ionic
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://ionicframework.com/docs/components"
+        >UI Components</a
+      >
+    </p>
+  </div>
+
+  <!-- Card for File Upload -->
+  <ion-card (click)="fileInput.click()" class="ion-text-center">
+    <img #iconContent src="assets/icon/upload.png" alt="" />
+    <ion-card-header>
+      <ion-card-title
+        >{{ selectedFile?.name || 'Upload Document' }}</ion-card-title
+      >
+    </ion-card-header>
+  </ion-card>
+
+  <form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
+    <input
+      formControlName="file"
+      type="file"
+      accept=".doc,.docx,.pdf"
+      #fileInput
+      (change)="onFileSelected($event)"
+      style="display: none"
+    />
+
+    <!-- Select for Document Language -->
+    <ion-item class="ion-margin-top" lines="none" formControlName="language">
+      <ion-label>Language</ion-label>
+      <ion-select placeholder="Select Language">
+        <ion-select-option value="en">English</ion-select-option>
+        <ion-select-option value="es">Spanish</ion-select-option>
+        <ion-select-option value="fr">French</ion-select-option>
+        <ion-select-option value="de">German</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button type="submit" expand="block" shape="round" color="primary">
+      Translate
+    </ion-button>
+  </form>
+</ion-content>
